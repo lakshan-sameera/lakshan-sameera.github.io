@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakshan Sameera</title>
+  <meta name="description" content="Personal portfolio of a cybersecurity undergraduate. CTFs, TryHackMe, write-ups, certifications, and more.">
+  <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .gradient-text {
+      background: linear-gradient(45deg, #0891b2, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .tryhackme-logo {
+      background: linear-gradient(45deg, #1DB954, #1ed760);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #gradient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at center, transparent 0%, rgba(6, 182, 212, 0.1) 100%);
+      transition: background 0.5s ease;
+      pointer-events: none;
+    }
+    /* Dark mode enhancements */
+    .dark .gradient-text {
+      background: linear-gradient(45deg, #22d3ee, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .dark .card-hover:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .dark #gradient-bg {
+      background: radial-gradient(circle at center, transparent 0%, rgba(6, 182, 212, 0.15) 100%);
+    }
+  </style>
+  <script>
+    // Dark/Light mode toggle with enhanced transitions
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // Interactive background
+    document.addEventListener('DOMContentLoaded', () => {
+      const gradientBg = document.getElementById('gradient-bg');
+      
+      document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        const isDark = document.documentElement.classList.contains('dark');
+        const gradient = `
+          radial-gradient(
+            circle at ${x * 100}% ${y * 100}%,
+            ${isDark ? 'rgba(6, 182, 212, 0.2)' : 'rgba(6, 182, 212, 0.15)'} 0%,
+            ${isDark ? 'rgba(6, 182, 212, 0.15)' : 'rgba(6, 182, 212, 0.1)'} 25%,
+            ${isDark ? 'rgba(6, 182, 212, 0.1)' : 'rgba(6, 182, 212, 0.05)'} 50%,
+            transparent 100%
+          )
+        `;
+        
+        gradientBg.style.background = gradient;
+      });
+    });
+  </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+  <div id="gradient-bg"></div>
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-b border-gray-200 dark:border-gray-800 transition-colors duration-500">
+    <nav class="max-w-5xl mx-auto flex items-center justify-between p-4">
+      <div class="text-xl font-bold tracking-tight gradient-text">Lakshan Sameera</div>
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <!-- Desktop Menu -->
+      <ul class="hidden lg:flex gap-6 text-sm font-medium">
+        <li><a href="#home" class="hover:text-cyan-500 transition-colors">Home</a></li>
+        <li><a href="#about" class="hover:text-cyan-500 transition-colors">About Me</a></li>
+        <li><a href="#writeups" class="hover:text-cyan-500 transition-colors">Write-Ups</a></li>
+        <li><a href="#contact" class="hover:text-cyan-500 transition-colors">Contact</a></li>
+      </ul>
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="CV.pdf" download class="px-3 py-1.5 rounded bg-cyan-600 text-white hover:bg-cyan-700 transition hover-scale">Download CV</a>
+        
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+      <div class="px-4 py-3 space-y-3">
+        <a href="#home" class="block py-2 hover:text-cyan-500 transition-colors">Home</a>
+        <a href="#about" class="block py-2 hover:text-cyan-500 transition-colors">About Me</a>
+        <a href="#writeups" class="block py-2 hover:text-cyan-500 transition-colors">Write-Ups</a>
+        <a href="#contact" class="block py-2 hover:text-cyan-500 transition-colors">Contact</a>
+        <div class="flex items-center gap-3 pt-2">
+          <a href="CV.pdf" download class="flex-1 px-3 py-2 text-center rounded bg-cyan-600 text-white hover:bg-cyan-700 transition">Download CV</a>
+                     </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="max-w-5xl mx-auto flex flex-col items-center justify-center text-center py-12 md:py-20 px-4" data-aos="fade-up">
+    <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Hi, I'm <span class="gradient-text">Lakshan Sameera</span></h1>
+    <p class="text-base md:text-xl mb-6">Cybersecurity Undergraduate | CTF Player | TryHackMe Enthusiast | Technical Writer</p>
+    <div class="flex gap-4 justify-center mb-6">
+      <a href="https://github.com/lakshan-sameera" aria-label="GitHub" class="hover:text-cyan-500 transition-colors hover-scale p-2" target="_blank" rel="noopener">
+        <i class="fab fa-github text-2xl"></i>
+      </a>
+      <a href="https://tryhackme.com/p/trexthedino" aria-label="TryHackMe" class="hover:text-cyan-500 transition-colors hover-scale p-2" target="_blank" rel="noopener">
+        <img src="tryhackme_logo_full.svg" alt="TryHackMe" class="w-8 h-8">
+      </a>
+      <a href="https://www.linkedin.com/in/lakshan-sameera" aria-label="LinkedIn" class="hover:text-cyan-500 transition-colors hover-scale p-2" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin text-2xl"></i>
+      </a>
+      <a href="mailto:lakshansameera636@gmail.com" aria-label="Email" class="hover:text-cyan-500 transition-colors hover-scale p-2">
+        <i class="fas fa-envelope text-2xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section id="about" class="max-w-3xl mx-auto py-12 md:py-16 px-4" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-4 gradient-text">About Me</h2>
+    <p class="mb-4 text-base md:text-lg">I'm a cybersecurity undergraduate passionate about ethical hacking, CTFs, and sharing knowledge through technical write-ups. I enjoy exploring new vulnerabilities, learning about security tools, and participating in online competitions.</p>
+    <div class="flex flex-wrap gap-2 mt-4">
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Python</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Linux</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Burp Suite</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Nmap</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Wireshark</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Metasploit</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">TryHackMe</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">CTF</span>
+      <span class="bg-gray-200 dark:bg-gray-800 px-3 py-1.5 rounded-full text-sm hover-scale">Write-Ups</span>
+    </div>
+
+    <!-- TryHackMe Badge Section -->
+    <div class="mt-12 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800/50 dark:to-gray-900/50 p-4 md:p-6 rounded-2xl shadow-xl card-hover border border-gray-200 dark:border-gray-700 transform transition-all duration-300 hover:scale-[1.02]">
+      <div class="flex flex-col items-center">
+        <h3 class="text-lg md:text-xl font-bold mb-4 text-cyan-600 dark:text-cyan-400 flex items-center gap-2">
+          <img src="tryhackme_logo_full.svg" alt="TryHackMe" class="w-6 h-6 md:w-7 md:h-7 animate-pulse">
+          TryHackMe Profile
+        </h3>
+        <div class="relative w-full max-w-[400px] bg-white/80 dark:bg-gray-800/80 rounded-xl p-3 md:p-4 shadow-lg backdrop-blur-sm">
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent dark:from-cyan-400/20 rounded-xl"></div>
+          <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=1454754" 
+                  style="border:none; width: 100%; height: 180px; overflow: hidden;" 
+                  class="rounded-lg" 
+                  scrolling="no">
+          </iframe>
+          <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent dark:from-gray-900/20 pointer-events-none rounded-xl"></div>
+        </div>
+        <a href="https://tryhackme.com/p/trexthedino" 
+           target="_blank" 
+           rel="noopener" 
+           class="mt-4 px-4 md:px-5 py-2 bg-gradient-to-r from-cyan-600 to-cyan-700 dark:from-cyan-500 dark:to-cyan-600 hover:from-cyan-700 hover:to-cyan-800 dark:hover:from-cyan-600 dark:hover:to-cyan-700 text-white rounded-lg transition-all duration-300 flex items-center gap-2 group shadow-md hover:shadow-lg">
+          <img src="tryhackme_logo_full.svg" alt="TryHackMe" class="w-4 h-4 group-hover:scale-110 transition-transform">
+          <span class="font-medium text-sm">View Full Profile</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Write-Ups -->
+  <section id="writeups" class="max-w-3xl mx-auto py-12 md:py-16 px-4" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-4 gradient-text">Write-Ups</h2>
+    <div class="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-4 md:p-6 rounded-lg shadow-lg card-hover border border-gray-200 dark:border-gray-700">
+      <div class="space-y-6 md:space-y-8">
+        <!-- TryHackMe Rooms Section -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-cyan-600 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            TryHackMe Rooms
+          </h3>
+          <ul class="space-y-2 md:space-y-3">
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Lookup-148b111f563a80dd8eebf37ebd34f9fd?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Lookup</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Year-of-the-Rabbit-Easy-134b111f563a804ebac4e8a6dbb6382a?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Year of the Rabbit (Easy)</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Opacity-135b111f563a80fc8a70f297cdd8d2a3?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Opacity</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/ConvertMyVideo-14bb111f563a8072b46ec6563acbee1a?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">ConvertMyVideo</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/The-Sticker-Shop-14fb111f563a8027b470e942f53ce477?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">The Sticker Shop</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Backtrack-153b111f563a80e88e9ddf4862aee7c3?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Backtrack</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Silver-Platter-180b111f563a80f1a20fca283b98dfd1?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Silver Platter</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Lo-Fi-181b111f563a80cbaedbff2781c4fc9b?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Lo-Fi</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Smol-18fb111f563a80fa9ce2eb5030ea488c?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Smol</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Billing-1ceb111f563a803ca44be15f27cb1115?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Billing</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Pyrat-1d2b111f563a8074a12ce3fb7850d8fa?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Pyrat</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/Breakme-1d2b111f563a80b79d77ecda2fcdd7fe?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">Breakme</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tutorials & Guides Section -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4 text-cyan-600 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            Tutorials & Guides
+          </h3>
+          <ul class="space-y-2 md:space-y-3">
+            <li class="flex items-center justify-between p-2.5 md:p-3 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+              <a href="https://www.notion.so/How-to-share-files-between-Attacking-machine-and-Victim-machine-14ab111f563a80c3919ff592e3a575de?pvs=4" target="_blank" rel="noopener" class="text-cyan-600 hover:underline flex-grow text-sm md:text-base">How to Share Files Between Attacking Machine and Victim Machine</a>
+              <span class="ml-2 text-xs bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-full">Notion</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="max-w-3xl mx-auto py-12 md:py-16 px-4" data-aos="fade-up">
+    <h2 class="text-2xl font-bold mb-4 gradient-text">Contact</h2>
+    <div class="bg-gray-100 dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm card-hover">
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <i class="fab fa-linkedin text-xl md:text-2xl text-cyan-600"></i>
+          <a href="https://www.linkedin.com/in/lakshan-sameera" target="_blank" rel="noopener" class="text-cyan-600 hover:underline text-sm md:text-base">LinkedIn Profile</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <i class="fas fa-envelope text-xl md:text-2xl text-cyan-600"></i>
+          <a href="mailto:lakshansameera636@gmail.com" class="text-cyan-600 hover:underline text-sm md:text-base">lakshansameera636@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-6 md:py-8 text-sm text-gray-500 dark:text-gray-400 px-4">
+    &copy; Lakshan Sameera 2024. Built with <a href="https://tailwindcss.com/" class="text-cyan-600 hover:underline">TailwindCSS</a>.
+  </footer>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const themeIconMobile = document.getElementById('theme-icon-mobile');
+
+    function updateTheme(isDark) {
+      if(isDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+        themeIcon.innerHTML = `<path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71' />`;
+        themeIconMobile.innerHTML = themeIcon.innerHTML;
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+        themeIcon.innerHTML = `<circle cx='12' cy='12' r='5' fill='currentColor'/><path stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 7.07l-1.41-1.41M6.34 6.34L4.93 4.93m12.02 0l-1.41 1.41M6.34 17.66l-1.41 1.41' />`;
+        themeIconMobile.innerHTML = themeIcon.innerHTML;
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      updateTheme(!document.documentElement.classList.contains('dark'));
+    });
+
+    themeToggleMobile.addEventListener('click', () => {
+      updateTheme(!document.documentElement.classList.contains('dark'));
+    });
+
+    // Initial theme setup
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      updateTheme(true);
+    } else {
+      updateTheme(false);
+    }
+  </script>
+</body>
+</html> 
